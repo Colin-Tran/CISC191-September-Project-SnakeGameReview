@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener{
 
-    static final int SCREEN_WIDTH = 1300;
-    static final int SCREEN_HEIGHT = 750;
+    static final int SCREEN_WIDTH = 1400;
+    static final int SCREEN_HEIGHT = 850;
     static final int UNIT_SIZE = 50;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
     static final int DELAY = 175;
@@ -22,15 +22,20 @@ public class GamePanel extends JPanel implements ActionListener{
     Timer timer;
     Random random;
 
+    Boolean gameOver = false;
+
     GamePanel(){
         random = new Random();
+
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
+
         startGame();
     }
     public void startGame() {
+
         newApple();
         running = true;
         timer = new Timer(DELAY,this);
@@ -71,6 +76,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         else {
             gameOver(g);
+            gameOver = true;
         }
 
     }
@@ -146,16 +152,23 @@ public class GamePanel extends JPanel implements ActionListener{
         g.setFont( new Font("Ink Free",Font.BOLD, 75));
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+        gameOver = true;
+    }
+
+    public Boolean isGameOver(){
+        return gameOver;
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if(running) {
             move();
             checkApple();
             checkCollisions();
         }
         repaint();
+
+
     }
 
     public class MyKeyAdapter extends KeyAdapter{

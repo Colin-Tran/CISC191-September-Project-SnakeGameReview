@@ -1,5 +1,11 @@
 package edu.sdccd.cisc191.template;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.awt.*;
 import java.net.*;
 import java.io.*;
 
@@ -16,7 +22,8 @@ import java.io.*;
 public class Server {
     public static void main(String[] args) {
 
-        new GameFrame();
+        GameFrame G = new GameFrame();
+
     }
 }
 //https://www.youtube.com/watch?v=bI6e6qjJ8JQ
